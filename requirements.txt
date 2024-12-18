@@ -1,0 +1,9 @@
+coverage
+click
+twine
+pytest
+aioresponses
+joblib
+asyncio
+aiohttp
+tqdm

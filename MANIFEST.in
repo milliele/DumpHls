@@ -1,0 +1,5 @@
+include LICENSE
+include requirements.txt
+graft src
+prune **/__pycache__
+prune tests

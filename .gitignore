@@ -1,0 +1,7 @@
+__pycache__
+build
+dist
+.coverage
+htmlcov
+.coveragerc
+**/output_data
