@@ -1,12 +1,16 @@
-name: Python Package CI/CD
+name: CI and Publish to PyPI
 
 on:
   push:
-    branches:
-      - '**'
+    branches: [ main ]
   pull_request:
-    branches:
-      - '**'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish to PyPI if tests pass?'
+        required: true
+        default: 'false'
+        type: boolean
 
 jobs:
   test:
@@ -26,7 +30,9 @@ jobs:
 
   publish:
     needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
     runs-on: ubuntu-latest
     name: Publish to PyPI
     steps:
@@ -46,7 +52,7 @@ jobs:
         run: |
           make build
 
-      - name: Publish package to PyPI
+      - name: Publish to PyPI
         env:
           TWINE_USERNAME: ${{ vars.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
