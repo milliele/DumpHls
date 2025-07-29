@@ -98,3 +98,4 @@ jobs:
           name: ${{ steps.release_info.outputs.name }}
           tag: ${{ steps.release_info.outputs.name }}
           token: ${{ secrets.GH_PAT }}
+          skipIfReleaseExists: true
