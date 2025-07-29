@@ -16,6 +16,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: Run Unit Tests
+    concurrency:
+      group: test-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
 
