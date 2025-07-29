@@ -3,6 +3,7 @@ This module contains all the information related to the current release of the
 library including descriptions, version number, authors and contact
 information.
 """
+import sys
 
 # module information
 name = 'dump_hls'
@@ -64,3 +65,9 @@ def validate_version(version):
 
 
 validate_version(version)
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        attr_name = sys.argv[1]
+        if attr_name in globals():
+            print(globals()[attr_name])

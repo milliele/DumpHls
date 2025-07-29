@@ -30,7 +30,7 @@ jobs:
         run: |
           make integrated-test
 
-  publish:
+  pypi-publish:
     needs: test
     if: |
       (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
@@ -60,3 +60,39 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           twine upload dist/* --skip-existing
+
+  git-release:
+    needs: test
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
+    runs-on: ubuntu-latest
+    name: Git Release
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine wheel
+
+      - name: Build package
+        run: |
+          make build
+
+      - name: Get Release Info
+        id: release_info
+        run: |
+          echo "name=$(python src/dump_hls/release.py release_name)" >> $GITHUB_OUTPUT
+          python src/dump_hls/release.py release_body > body.md
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*"
+          bodyFile: "body.md"
+          name: ${{ steps.release_info.outputs.name }}
