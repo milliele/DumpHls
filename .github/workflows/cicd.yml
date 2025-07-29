@@ -97,3 +97,4 @@ jobs:
           bodyFile: "body.md"
           name: ${{ steps.release_info.outputs.name }}
           tag: ${{ steps.release_info.outputs.name }}
+          token: ${{ secrets.GH_PAT }}
