@@ -20,11 +20,13 @@ description_short = 'A python package to dump any HLS stream as it is'
 url = 'https://github.com/milliele/DumpHls'
 
 # ======================= gitRelease information =============================
-version = '0.0.99'
+version = '1.0.0'
 """Version information, used by __init__, doc, setup and gitRelease"""
 release_name = f"v{version}"
 """The release title"""
-release_body = """""".strip()
+release_body = """
+The initial release of DumpHls.
+""".strip()
 """The release body"""
 is_draft = False
 """Is this github release a draft"""

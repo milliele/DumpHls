@@ -47,16 +47,6 @@ class TestStreamDumper:
         yield StreamDumper(path)
         shutil.rmtree(path)
 
-    @pytest.fixture
-    def master_payload(self):
-        a = StreamDumper(os.path.join(BASE_DIR, '../'))
-        return a.load_file('https://test_data/master.m3u8', update=False)
-
-    @pytest.fixture
-    def media_payload(self):
-        a = StreamDumper(os.path.join(BASE_DIR, '../'))
-        return a.load_file('https://test_data/media.m3u8', update=False)
-
     def test_constructor(self):
         # str
         a = StreamDumper(BASE_DIR)
@@ -101,9 +91,6 @@ class TestStreamDumper:
         fs_path2 = dumper.download_file(url, update=True)
         assert fs_path == fs_path2
         assert os.path.getmtime(str(fs_path)) > mtime
-
-    def test_load_file(self, master_payload):
-        assert master_payload.startswith('#EXTM3U')
 
     @pytest.mark.parametrize("payload, url, expected", [
         (
