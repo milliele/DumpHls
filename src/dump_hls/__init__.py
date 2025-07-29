@@ -1,7 +1,13 @@
 """A python package to dump any HLS stream as it is"""
+import os.path
+import sys
 
-# Import release information
-import dump_hls.release as release
+# It imports release module this way because if it tried to import the whole package
+# and some required dependencies were not installed, that would fail
+# This is the only way to access the release module without needing all
+# dependencies.
+sys.path.insert(0, os.path.dirname(__file__))
+import release
 
 __author__ = release.author
 __version__ = release.version

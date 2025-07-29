@@ -12,8 +12,8 @@ from urllib.parse import urlparse
 
 import click
 
-from dump_hls import __version__
-from dump_hls.main import StreamDumper
+from main import StreamDumper
+from . import __version__
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
