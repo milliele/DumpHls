@@ -56,7 +56,7 @@ setup(
     install_requires=requirements_prod,
     entry_points={
         'console_scripts': [
-            "dumphls = src.dump_hls.cli:main",
+            'dumphls=dump_hls.cli:dumphls',
         ],
     },
     classifiers=[

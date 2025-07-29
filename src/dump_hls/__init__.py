@@ -1,7 +1,7 @@
 """A python package to dump any HLS stream as it is"""
 
 # Import release information
-import src.dump_hls.release as release
+import dump_hls.release as release
 
 __author__ = release.author
 __version__ = release.version
