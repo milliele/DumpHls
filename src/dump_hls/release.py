@@ -21,12 +21,12 @@ description_short = 'A python package to dump any HLS stream as it is'
 url = 'https://github.com/milliele/DumpHls'
 
 # ======================= gitRelease information =============================
-version = '1.0.0'
+version = '1.0.1'
 """Version information, used by __init__, doc, setup and gitRelease"""
 release_name = f"v{version}"
 """The release title"""
 release_body = """
-The initial release of DumpHls.
+1. v1.0.0 is incorrect on PyPI, upload a new version to fix the issue.
 """.strip()
 """The release body"""
 is_draft = False
